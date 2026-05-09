@@ -1,0 +1,979 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jerome Amador – Executive Assistant & Virtual Professional</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0D1B2A;
+    --deep: #1B2E42;
+    --accent: #C9973A;
+    --accent-light: #E8B86D;
+    --cream: #F5F0E8;
+    --muted: #8A9BB0;
+    --white: #FFFFFF;
+    --card: #162536;
+    --border: rgba(201,151,58,0.2);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--navy);
+    color: var(--cream);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    overflow-x: hidden;
+  }
+
+  /* ── NOISE TEXTURE OVERLAY ── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.4;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    padding: 24px 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: linear-gradient(to bottom, rgba(13,27,42,0.95), transparent);
+    backdrop-filter: blur(8px);
+  }
+
+  .nav-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--accent);
+    letter-spacing: 0.02em;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 40px;
+    list-style: none;
+  }
+
+  .nav-links a {
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 13px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    font-weight: 500;
+    transition: color 0.3s;
+  }
+
+  .nav-links a:hover { color: var(--accent); }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding: 120px 60px 80px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::after {
+    content: '';
+    position: absolute;
+    top: -200px; right: -200px;
+    width: 700px; height: 700px;
+    background: radial-gradient(circle, rgba(201,151,58,0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .hero-content {
+    max-width: 700px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .hero-eyebrow {
+    font-size: 12px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-weight: 500;
+    margin-bottom: 24px;
+    opacity: 0;
+    animation: fadeUp 0.8s ease 0.2s forwards;
+  }
+
+  .hero-name {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(52px, 7vw, 88px);
+    font-weight: 900;
+    line-height: 1.0;
+    color: var(--white);
+    margin-bottom: 16px;
+    opacity: 0;
+    animation: fadeUp 0.8s ease 0.4s forwards;
+  }
+
+  .hero-name span { color: var(--accent); }
+
+  .hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(18px, 2.5vw, 26px);
+    font-weight: 400;
+    color: var(--muted);
+    margin-bottom: 32px;
+    font-style: italic;
+    opacity: 0;
+    animation: fadeUp 0.8s ease 0.6s forwards;
+  }
+
+  .hero-desc {
+    font-size: 16px;
+    line-height: 1.8;
+    color: #A8BDD0;
+    max-width: 560px;
+    margin-bottom: 48px;
+    opacity: 0;
+    animation: fadeUp 0.8s ease 0.8s forwards;
+  }
+
+  .hero-cta {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    opacity: 0;
+    animation: fadeUp 0.8s ease 1s forwards;
+  }
+
+  .btn-primary {
+    padding: 14px 32px;
+    background: var(--accent);
+    color: var(--navy);
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    transition: all 0.3s;
+    clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
+  }
+
+  .btn-primary:hover {
+    background: var(--accent-light);
+    transform: translateY(-2px);
+  }
+
+  .btn-secondary {
+    padding: 14px 32px;
+    border: 1px solid var(--border);
+    color: var(--cream);
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    transition: all 0.3s;
+    clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
+  }
+
+  .btn-secondary:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+    transform: translateY(-2px);
+  }
+
+  /* Hero stats */
+  .hero-stats {
+    position: absolute;
+    right: 60px;
+    bottom: 100px;
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    opacity: 0;
+    animation: fadeLeft 0.8s ease 1.2s forwards;
+  }
+
+  .stat {
+    text-align: right;
+    border-right: 2px solid var(--accent);
+    padding-right: 20px;
+  }
+
+  .stat-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 36px;
+    font-weight: 700;
+    color: var(--white);
+    line-height: 1;
+  }
+
+  .stat-label {
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-top: 4px;
+  }
+
+  /* ── SECTION BASE ── */
+  section {
+    padding: 100px 60px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .section-label {
+    font-size: 11px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-weight: 500;
+    margin-bottom: 16px;
+  }
+
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(32px, 4vw, 48px);
+    font-weight: 700;
+    color: var(--white);
+    margin-bottom: 60px;
+    line-height: 1.15;
+  }
+
+  /* ── ABOUT ── */
+  .about {
+    background: var(--deep);
+  }
+
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: start;
+  }
+
+  .about-text p {
+    font-size: 16px;
+    line-height: 1.9;
+    color: #A8BDD0;
+    margin-bottom: 20px;
+  }
+
+  .about-highlights {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .highlight-item {
+    padding: 24px 28px;
+    background: var(--card);
+    border-left: 3px solid var(--accent);
+    transition: transform 0.3s;
+  }
+
+  .highlight-item:hover { transform: translateX(6px); }
+
+  .highlight-item h4 {
+    font-size: 13px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 8px;
+    font-weight: 500;
+  }
+
+  .highlight-item p {
+    font-size: 15px;
+    color: #A8BDD0;
+    line-height: 1.6;
+  }
+
+  /* ── SKILLS ── */
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+
+  .skill-card {
+    padding: 32px 28px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    transition: all 0.3s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .skill-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--accent), transparent);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s;
+  }
+
+  .skill-card:hover::before { transform: scaleX(1); }
+  .skill-card:hover { border-color: rgba(201,151,58,0.4); transform: translateY(-4px); }
+
+  .skill-icon {
+    font-size: 28px;
+    margin-bottom: 16px;
+  }
+
+  .skill-card h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    color: var(--white);
+    margin-bottom: 12px;
+  }
+
+  .skill-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 16px;
+  }
+
+  .tag {
+    padding: 4px 12px;
+    background: rgba(201,151,58,0.1);
+    border: 1px solid rgba(201,151,58,0.2);
+    color: var(--accent-light);
+    font-size: 11px;
+    letter-spacing: 0.08em;
+  }
+
+  /* ── EXPERIENCE ── */
+  .experience { background: var(--deep); }
+
+  .timeline {
+    position: relative;
+    padding-left: 40px;
+  }
+
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 8px; bottom: 0;
+    width: 1px;
+    background: linear-gradient(to bottom, var(--accent), transparent);
+  }
+
+  .timeline-item {
+    position: relative;
+    margin-bottom: 56px;
+    opacity: 0;
+    transform: translateX(-20px);
+    transition: all 0.6s ease;
+  }
+
+  .timeline-item.visible {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  .timeline-item::before {
+    content: '';
+    position: absolute;
+    left: -44px; top: 8px;
+    width: 10px; height: 10px;
+    background: var(--accent);
+    border-radius: 50%;
+    box-shadow: 0 0 0 4px rgba(201,151,58,0.2);
+  }
+
+  .timeline-date {
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 8px;
+    font-weight: 500;
+  }
+
+  .timeline-role {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    color: var(--white);
+    margin-bottom: 4px;
+  }
+
+  .timeline-company {
+    font-size: 14px;
+    color: var(--muted);
+    margin-bottom: 20px;
+    font-style: italic;
+  }
+
+  .timeline-bullets {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .timeline-bullets li {
+    font-size: 15px;
+    color: #A8BDD0;
+    line-height: 1.7;
+    padding-left: 20px;
+    position: relative;
+  }
+
+  .timeline-bullets li::before {
+    content: '—';
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+    font-size: 12px;
+  }
+
+  /* ── TOOLS ── */
+  .tools-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 16px;
+  }
+
+  .tool-item {
+    padding: 16px 20px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    font-size: 13px;
+    color: #A8BDD0;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    transition: all 0.25s;
+    text-align: center;
+  }
+
+  .tool-item:hover {
+    background: rgba(201,151,58,0.08);
+    border-color: var(--accent);
+    color: var(--accent-light);
+  }
+
+  /* ── CERTIFICATIONS ── */
+  .certs { background: var(--deep); }
+
+  .cert-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+
+  .cert-card {
+    padding: 32px 28px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    transition: all 0.3s;
+  }
+
+  .cert-card:hover {
+    border-color: rgba(201,151,58,0.5);
+    transform: translateY(-4px);
+  }
+
+  .cert-badge {
+    width: 48px; height: 48px;
+    background: rgba(201,151,58,0.15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    margin-bottom: 20px;
+    clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+  }
+
+  .cert-card h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 17px;
+    color: var(--white);
+    margin-bottom: 8px;
+    line-height: 1.3;
+  }
+
+  .cert-card p {
+    font-size: 13px;
+    color: var(--muted);
+    letter-spacing: 0.04em;
+  }
+
+  /* ── SETUP ── */
+  .setup-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+    max-width: 720px;
+  }
+
+  .setup-item {
+    padding: 28px;
+    background: var(--card);
+    border: 1px solid var(--border);
+  }
+
+  .setup-item h4 {
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 10px;
+    font-weight: 500;
+  }
+
+  .setup-item p {
+    font-size: 14px;
+    color: #A8BDD0;
+    line-height: 1.6;
+  }
+
+  /* ── CONTACT ── */
+  .contact {
+    background: var(--deep);
+    text-align: center;
+  }
+
+  .contact .section-title { margin-bottom: 16px; }
+
+  .contact-sub {
+    font-size: 16px;
+    color: var(--muted);
+    margin-bottom: 48px;
+    max-width: 480px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.7;
+  }
+
+  .contact-links {
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+    flex-wrap: wrap;
+    margin-bottom: 48px;
+  }
+
+  .contact-link {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 16px 28px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    color: var(--cream);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    transition: all 0.3s;
+    letter-spacing: 0.04em;
+  }
+
+  .contact-link:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+    transform: translateY(-3px);
+  }
+
+  .contact-link span { font-size: 18px; }
+
+  /* ── FOOTER ── */
+  footer {
+    padding: 32px 60px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  footer p {
+    font-size: 13px;
+    color: var(--muted);
+  }
+
+  .footer-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    color: var(--accent);
+    font-weight: 700;
+  }
+
+  /* ── AVAILABILITY BADGE ── */
+  .availability {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 20px;
+    background: rgba(52,199,89,0.08);
+    border: 1px solid rgba(52,199,89,0.25);
+    margin-bottom: 32px;
+    opacity: 0;
+    animation: fadeUp 0.8s ease 0.1s forwards;
+  }
+
+  .dot {
+    width: 8px; height: 8px;
+    background: #34C759;
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+  }
+
+  .availability span {
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #34C759;
+    font-weight: 500;
+  }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes fadeLeft {
+    from { opacity: 0; transform: translateX(24px); }
+    to   { opacity: 1; transform: translateX(0); }
+  }
+
+  @keyframes pulse {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(52,199,89,0.4); }
+    50% { box-shadow: 0 0 0 6px rgba(52,199,89,0); }
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    nav { padding: 20px 24px; }
+    .nav-links { display: none; }
+    section { padding: 70px 24px; }
+    .hero { padding: 100px 24px 80px; }
+    .hero-stats { display: none; }
+    .about-grid { grid-template-columns: 1fr; gap: 40px; }
+    .skills-grid { grid-template-columns: 1fr 1fr; }
+    .cert-grid { grid-template-columns: 1fr; }
+    .setup-grid { grid-template-columns: 1fr; }
+    footer { flex-direction: column; gap: 12px; text-align: center; }
+  }
+
+  @media (max-width: 600px) {
+    .skills-grid { grid-template-columns: 1fr; }
+    .hero-cta { flex-direction: column; }
+    .btn-primary, .btn-secondary { text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">JA</div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#tools">Tools</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-content">
+    <div class="availability">
+      <div class="dot"></div>
+      <span>Available for Remote Roles</span>
+    </div>
+    <div class="hero-eyebrow">Executive Assistant &amp; Virtual Professional</div>
+    <h1 class="hero-name">Jerome<br><span>Amador</span></h1>
+    <p class="hero-title">Keeping executives organized, clients happy,<br>and operations running.</p>
+    <p class="hero-desc">5+ years managing high-volume schedules, multi-channel communications, and cross-functional operations across healthcare and sales. Based in Bulacan, Philippines. Open to US, UK, and AU timezones.</p>
+    <div class="hero-cta">
+      <a href="#contact" class="btn-primary">Get in Touch</a>
+      <a href="#experience" class="btn-secondary">View Experience</a>
+    </div>
+  </div>
+
+  <div class="hero-stats">
+    <div class="stat">
+      <div class="stat-num">5+</div>
+      <div class="stat-label">Years Experience</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">30+</div>
+      <div class="stat-label">Daily Interactions</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">3</div>
+      <div class="stat-label">Certifications</div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div class="section-label">Who I Am</div>
+  <h2 class="section-title">Detail-Driven.<br>Dependable. Remote-Ready.</h2>
+  <div class="about-grid">
+    <div class="about-text">
+      <p>I'm an executive and general assistant with 5+ years of experience keeping operations tight, calendars full, and stakeholders informed. I've handled everything from managing 30+ weekly service appointments to coordinating across 8-member cross-functional teams, all while maintaining accurate records and professional communication.</p>
+      <p>My background spans healthcare administration, sales operations, and client-facing support. I'm equally comfortable owning a task queue independently or collaborating closely with an executive to anticipate what they need before they ask.</p>
+      <p>I hold a Bachelor's degree in Business Administration and certifications in Google Workspace, HubSpot Inbound Marketing, and Google AI Essentials. I'm fluent in English and available for US, UK, and AU timezone coverage, including graveyard shifts.</p>
+    </div>
+    <div class="about-highlights">
+      <div class="highlight-item">
+        <h4>Time Zone Coverage</h4>
+        <p>US (EST/CST/PST), UK, and AU timezones. Open to graveyard and overnight shifts.</p>
+      </div>
+      <div class="highlight-item">
+        <h4>Remote Setup</h4>
+        <p>Converge Fiber 400 Mbps primary + PLDT Fiber 300 Mbps backup. Desktop, headset, quiet workspace.</p>
+      </div>
+      <div class="highlight-item">
+        <h4>Education</h4>
+        <p>BS Business Administration, Marketing Management — Our Lady of Fatima University, 2018.</p>
+      </div>
+      <div class="highlight-item">
+        <h4>Languages</h4>
+        <p>English (Fluent) and Filipino (Native).</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-label">What I Do</div>
+  <h2 class="section-title">Core Competencies</h2>
+  <div class="skills-grid">
+    <div class="skill-card">
+      <div class="skill-icon">📅</div>
+      <h3>Calendar & Schedule Management</h3>
+      <p style="font-size:14px;color:#A8BDD0;line-height:1.7;">Executive calendar ownership, meeting coordination, travel itineraries, and same-day gap filling to keep schedules running at full capacity.</p>
+      <div class="skill-tags">
+        <span class="tag">Calendly</span>
+        <span class="tag">Google Calendar</span>
+        <span class="tag">Outlook</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-icon">📧</div>
+      <h3>Inbox & Communications Management</h3>
+      <p style="font-size:14px;color:#A8BDD0;line-height:1.7;">High-volume email triage, stakeholder correspondence, and multi-channel client communication with consistent professionalism.</p>
+      <div class="skill-tags">
+        <span class="tag">Gmail</span>
+        <span class="tag">Outlook</span>
+        <span class="tag">Slack</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-icon">🗂️</div>
+      <h3>CRM & Data Management</h3>
+      <p style="font-size:14px;color:#A8BDD0;line-height:1.7;">Accurate data entry, record maintenance, and CRM workflow management to keep pipelines clean and reporting reliable.</p>
+      <div class="skill-tags">
+        <span class="tag">HubSpot</span>
+        <span class="tag">SAP B1</span>
+        <span class="tag">Globe CRM</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-icon">🔗</div>
+      <h3>Project & Task Coordination</h3>
+      <p style="font-size:14px;color:#A8BDD0;line-height:1.7;">Cross-functional team coordination, task delegation, and workflow management across multiple departments and time zones.</p>
+      <div class="skill-tags">
+        <span class="tag">Asana</span>
+        <span class="tag">ClickUp</span>
+        <span class="tag">Trello</span>
+        <span class="tag">Notion</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-icon">📋</div>
+      <h3>Administrative Documentation</h3>
+      <p style="font-size:14px;color:#A8BDD0;line-height:1.7;">Executive reports, management correspondence, SOPs, and administrative records with accuracy and attention to detail.</p>
+      <div class="skill-tags">
+        <span class="tag">Google Docs</span>
+        <span class="tag">MS Word</span>
+        <span class="tag">MS Excel</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-icon">🤝</div>
+      <h3>Client & Stakeholder Support</h3>
+      <p style="font-size:14px;color:#A8BDD0;line-height:1.7;">30+ daily client interactions, first-contact resolution, and relationship management across sales, healthcare, and service environments.</p>
+      <div class="skill-tags">
+        <span class="tag">Phone Support</span>
+        <span class="tag">Email Support</span>
+        <span class="tag">Zoom</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section class="experience" id="experience">
+  <div class="section-label">Career History</div>
+  <h2 class="section-title">Work Experience</h2>
+  <div class="timeline">
+
+    <div class="timeline-item">
+      <div class="timeline-date">November 2022 – Present</div>
+      <div class="timeline-role">Administrative Virtual Assistant / Service Coordinator</div>
+      <div class="timeline-company">Lifeline Diagnostic Supplies</div>
+      <ul class="timeline-bullets">
+        <li>Managed 30+ weekly service appointments and client schedules, reducing missed bookings through proactive calendar management and real-time rescheduling.</li>
+        <li>Handled 30+ daily client interactions via phone and email, resolving inquiries with consistent first-contact resolution.</li>
+        <li>Maintained and updated service records in SAP Business One, improving data tracking accuracy and reducing reporting errors across the team.</li>
+        <li>Coordinated daily workflows and task delegation across an 8-member cross-functional team.</li>
+        <li>Prepared administrative documentation, management reports, and executive correspondence to support leadership decisions.</li>
+      </ul>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-date">September 2021 – September 2022</div>
+      <div class="timeline-role">Customer Support Specialist / Administrative Assistant</div>
+      <div class="timeline-company">Hi-Precision Diagnostics, Commonwealth Branch</div>
+      <ul class="timeline-bullets">
+        <li>Fielded 30+ daily patient and client inquiries across in-person and phone channels, ensuring timely and professional resolution.</li>
+        <li>Processed and maintained appointment records and patient data with high accuracy using internal clinic management systems.</li>
+        <li>Coordinated scheduling and communication between medical staff and admin teams for smooth daily operations.</li>
+        <li>Reduced client wait times through organized front-desk scheduling and proactive appointment reminders.</li>
+      </ul>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-date">September 2018 – June 2021</div>
+      <div class="timeline-role">Sales & Customer Service Specialist</div>
+      <div class="timeline-company">Globe Telecom, SM Fairview Branch</div>
+      <ul class="timeline-bullets">
+        <li>Assisted 30+ daily customers with product inquiries, account management, and after-sales support using Globe CRM.</li>
+        <li>Consistently met and exceeded monthly sales targets through needs-based consultation and proactive client follow-through.</li>
+        <li>Processed billing and account transactions with high accuracy, maintaining clean records and strong client satisfaction.</li>
+        <li>Trained and onboarded 8+ new team members on customer handling protocols and service standards.</li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+<!-- TOOLS -->
+<section id="tools">
+  <div class="section-label">Tech Stack</div>
+  <h2 class="section-title">Tools & Platforms</h2>
+  <div class="tools-grid">
+    <div class="tool-item">HubSpot CRM</div>
+    <div class="tool-item">SAP Business One</div>
+    <div class="tool-item">Google Workspace</div>
+    <div class="tool-item">Microsoft Office</div>
+    <div class="tool-item">Asana</div>
+    <div class="tool-item">ClickUp</div>
+    <div class="tool-item">Trello</div>
+    <div class="tool-item">Notion</div>
+    <div class="tool-item">Monday.com</div>
+    <div class="tool-item">Slack</div>
+    <div class="tool-item">Zoom</div>
+    <div class="tool-item">Loom</div>
+    <div class="tool-item">Microsoft Teams</div>
+    <div class="tool-item">Calendly</div>
+    <div class="tool-item">Dropbox</div>
+    <div class="tool-item">LastPass</div>
+    <div class="tool-item">ChatGPT</div>
+    <div class="tool-item">Google Gemini</div>
+  </div>
+</section>
+
+<!-- CERTIFICATIONS -->
+<section class="certs" id="certs">
+  <div class="section-label">Credentials</div>
+  <h2 class="section-title">Certifications</h2>
+  <div class="cert-grid">
+    <div class="cert-card">
+      <div class="cert-badge">🏆</div>
+      <h3>Google Workspace Certification</h3>
+      <p>Google Skillshop</p>
+    </div>
+    <div class="cert-card">
+      <div class="cert-badge">📊</div>
+      <h3>HubSpot Inbound Marketing Certification</h3>
+      <p>HubSpot Academy</p>
+    </div>
+    <div class="cert-card">
+      <div class="cert-badge">🤖</div>
+      <h3>Google AI Essentials</h3>
+      <p>Coursera</p>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div class="section-label">Let's Work Together</div>
+  <h2 class="section-title">Get in Touch</h2>
+  <p class="contact-sub">Looking for a reliable, detail-oriented executive assistant or general VA? Let's talk about how I can make your operations smoother.</p>
+  <div class="contact-links">
+    <a href="mailto:jerome.amador.va@gmail.com" class="contact-link">
+      <span>✉️</span> jerome.amador.va@gmail.com
+    </a>
+    <a href="tel:+639958455456" class="contact-link">
+      <span>📞</span> +63 995 845 5456
+    </a>
+    <a href="https://linkedin.com/in/jerome-amador" target="_blank" class="contact-link">
+      <span>🔗</span> linkedin.com/in/jerome-amador
+    </a>
+  </div>
+  <a href="mailto:jerome.amador.va@gmail.com" class="btn-primary">Send Me a Message</a>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">Jerome Amador</div>
+  <p>Executive Assistant &amp; Virtual Professional · Bulacan, Philippines</p>
+  <p>Available US · UK · AU Timezones</p>
+</footer>
+
+<script>
+  // Scroll-triggered animations for timeline
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.15 });
+
+  document.querySelectorAll('.timeline-item').forEach(el => observer.observe(el));
+
+  // Smooth nav highlight
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('.nav-links a');
+
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(s => {
+      if (window.scrollY >= s.offsetTop - 100) current = s.id;
+    });
+    navLinks.forEach(a => {
+      a.style.color = a.getAttribute('href') === '#' + current ? 'var(--accent)' : '';
+    });
+  });
+</script>
+</body>
+</html>
